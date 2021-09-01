@@ -3,8 +3,8 @@ pipeline {
     environment{
         DATABASE_URI = credentials('DB-URI')
         SECRET_KEY = credentials('secretkey')
-	DOCKER_LOGIN = credentials('dockerhub'
-	SSH_HOSTKEY = credentials('sshhostkey'))
+	DOCKER_LOGIN = credentials('dockerhub')
+	SSH_HOSTKEY = credentials('sshhostkey')
     }
     stages {
         stage('Build') {
