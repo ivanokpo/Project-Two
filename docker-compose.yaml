@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+    - target: 80
+      published: 80
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: ./nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
+  
+
+  backend:
+    image: sjknapp/project-backend-image:latest
+    build: ./backend
+    ports: 
+    - target: 5000
+      published: 5000
+      protocol: tcp
+    environment:
+      DATABASE_URI: ${DATABASE_URI}
+      SECRET_KEY: ${SECRET_KEY}
+
+  frontend:
+    image: sjknapp/project-frontend-image:latest
+    build: ./frontend
+    ports:
+    - target: 5001
+      published: 5001
+      protocol: tcp
+
