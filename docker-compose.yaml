@@ -1,5 +1,5 @@
 version: "3.8"
-servces:
+services:
   backend:
     image: sjknapp/project-backend-image:latest
     build: ./backend
