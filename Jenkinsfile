@@ -4,6 +4,7 @@ pipeline {
         DATABASE_URI = credentials('DB-URI')
         SECRET_KEY = credentials('secretkey')
 	DOCKER_LOGIN = credentials('dockerhub')
+	SSH_HOSTKEY = credentials('sshhostkey')
     }
     stages {
         stage('Build') {
@@ -34,8 +35,11 @@ pipeline {
   
         stage('Deploy') {
             steps {
-             sh 'scp docker-compose.yaml jenkins@10.0.2.118:~'
-	     sh 'ssh jenkins@10.0.2.118 docker stack deploy --compose-file docker-compose.yaml project-stack'  
+             sh 'cat ${SSH_HOSTKEY} > hostkeyfile'
+	     sh 'chmod 600 hostkeyfile'
+	     sh 'eval `ssh-agent -s`'
+	     sh 'scp -i ~/.ssh/managerkeygen docker-compose.yaml jenkins@10.0.2.118:~'
+	     sh 'ssh -i ~/.ssh/managerkeygen jenkins@10.0.2.118 docker stack deploy --compose-file docker-compose.yaml project-stack'  
             }
             
          }   
