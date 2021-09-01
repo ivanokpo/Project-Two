@@ -37,6 +37,7 @@ pipeline {
             steps {
              sh 'cat ${SSH_HOSTKEY} > hostkeyfile'
 	     sh 'chmod 600 hostkeyfile'
+	     sh 'eval `ssh-agent -s`'
 	     sh 'ssh-add hostkeyfile'
 	     sh 'scp docker-compose.yaml -i ~/.ssh/managerkeygen jenkins@10.0.2.118:~'
 	     sh 'ssh jenkins@10.0.2.118 docker stack deploy --compose-file docker-compose.yaml project-stack'  
