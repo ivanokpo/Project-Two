@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy') {
             steps {
 	     dir("nginx"){
-	     	sh 'docker-compose up'
+	     	sh 'docker-compose up -d'
 	     }
 	     sh 'cat ${SSH_HOSTKEY} > hostkeyfile'
 	     sh 'chmod 600 hostkeyfile'
