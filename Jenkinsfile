@@ -42,7 +42,7 @@ pipeline {
 	     sh 'scp -i ~/.ssh/managerkeygen ./nginx/nginx.conf jenkins@10.0.2.118:/home/jenkins/nginx/nginx.conf'
 	     sh 'scp -i ~/.ssh/managerkeygen docker-compose.yaml jenkins@10.0.2.118:~'
 	     sh 'ssh -i ~/.ssh/managerkeygen jenkins@10.0.2.118 docker stack deploy --compose-file docker-compose.yaml project-stack'  
-	     sh 'ssh -i ~/.ssh/managerkeygen jenkins@10.0.2.118 source .profile && echo ${DATABASE_URI}'  
+	     sh 'ssh -i ~/.ssh/managerkeygen jenkins@10.0.2.118 "source .profile && echo ${DATABASE_URI}"'  
             }
             
          }   
