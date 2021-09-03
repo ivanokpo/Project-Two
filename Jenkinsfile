@@ -41,8 +41,6 @@ pipeline {
 	    }
             //sh 'cat ${SSH_HOSTKEY} > hostkeyfile && chmod 600 hostkeyfile'
             //sh 'eval `ssh-agent -s`'
-            sh 'scp -i ~/.ssh/jenkinsmanagerkey ./nginx/nginx.conf jenkins@11.0.2.11:/home/jenkins/nginx/nginx.conf'
-            sh 'scp -i ~/.ssh/jenkinsworkerkey ./nginx/nginx.conf jenkins@11.0.2.31:/home/jenkins/nginx/nginx.conf'
             sh 'scp -i ~/.ssh/jenkinsmanagerkey docker-compose.yaml jenkins@11.0.2.11:~'
             sh 'ssh -i ~/.ssh/jenkinsmanagerkey jenkins@11.0.2.11 "source .profile && docker stack deploy --compose-file docker-compose.yaml project-stack"'
             
