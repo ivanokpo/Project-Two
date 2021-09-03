@@ -1,10 +1,8 @@
 pipeline {
     agent any
     environment{
-        // DATABASE_URI = credentials('DB-URI')
-        // SECRET_KEY = credentials('secretkey')
         DOCKER_LOGIN = credentials('dockerhub')
-        //SSH_HOSTKEY = credentials('sshhostkey')
+	MANAGER_HOST_KEY = credentials('jenkinsmanagerkey')
     }
     stages {
         stage('Build') {
@@ -39,12 +37,10 @@ pipeline {
 	    dir("nginx-jenkins"){
 		sh 'docker stack deploy --compose-file docker-compose.yaml project-stack'
 	    }
-            //sh 'cat ${SSH_HOSTKEY} > hostkeyfile && chmod 600 hostkeyfile'
-            //sh 'eval `ssh-agent -s`'
-            sh 'scp -i ~/.ssh/jenkinsmanagerkey docker-compose.yaml jenkins@11.0.2.11:~'
-            sh 'ssh -i ~/.ssh/jenkinsmanagerkey jenkins@11.0.2.11 "source .profile && docker stack deploy --compose-file docker-compose.yaml project-stack"'
-            
-                
+
+            sh 'scp -i ${MANAGER_HOST_KEY} docker-compose.yaml jenkins@11.0.2.11:~'
+            sh 'ssh -i ${MANAGER_HOST_KEY} jenkins@11.0.2.11 "source .profile && docker stack deploy --compose-file docker-compose.yaml project-stack"'
+                            
             }
         }   
    }
