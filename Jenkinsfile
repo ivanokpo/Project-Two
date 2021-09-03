@@ -36,9 +36,6 @@ pipeline {
   
         stage('Deploy') {
             steps {
-	     dir("nginx-jenkins"){
-		sh 'docker stack deploy --compose-file docker-compose.yaml nginx-jenkins'
-	     }
              sh 'cat ${SSH_HOSTKEY} > hostkeyfile && chmod 600 hostkeyfile'
              sh 'eval `ssh-agent -s`'
              sh 'scp -i ~/.ssh/managerkeygen ./nginx/nginx.conf jenkins@10.0.2.118:/home/jenkins/nginx/nginx.conf'
