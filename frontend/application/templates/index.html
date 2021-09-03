@@ -3,7 +3,7 @@
     <p>Here are our users:</p>
     <form action="/" method="get">
         {% for user in response %}
-        <p style="color: red; font-size: 60px;">{{ user["userName"] }}</p>
+        <p style="color: orange; font-size: 70px;">{{ user["userName"] }}</p>
         {% endfor %}
         <button onClick="window.location.reload();">Generate Usernames!</button>  
     </form>
