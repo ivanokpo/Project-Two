@@ -49,9 +49,10 @@ pipeline {
         }   
    }
    post {
-	archiveArtifacts artifacts: 'frontend/htmlcov/index.html', fingerprint: true
-	archiveArtifacts artifacts: 'backend/htmlcov/index.html', fingerprint: true
+   	always {
+		archiveArtifacts artifacts: 'frontend/htmlcov/index.html', fingerprint: true
+		archiveArtifacts artifacts: 'backend/htmlcov/index.html', fingerprint: true
+        }		
    }
+
 }
-
-
