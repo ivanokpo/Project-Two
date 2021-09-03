@@ -8,5 +8,5 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /home/jenkins/nginx-jenkins/nginx.conf
+      source: ./nginx.conf
       target: /etc/nginx/nginx.conf
