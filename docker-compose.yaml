@@ -7,6 +7,16 @@ services:
       replicas: 5
       update_config:
         order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s  
     ports: 
     - target: 5001
       published: 5001
@@ -22,6 +32,16 @@ services:
       replicas: 5
       update_config:
         order: start-first
+          failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     ports:
     - target: 5000
       published: 5000
