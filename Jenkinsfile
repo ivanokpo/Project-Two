@@ -47,6 +47,11 @@ pipeline {
                 
             }
         }   
-    }
+   }
+   post {
+	archiveartifacts artifacts: 'frontend/htmlcov/index.html', fingerprint: true
+	archiveartifacts artifacts: 'backend/htmlcov/index.html', fingerprint: true
+   }
 }
+
 
