@@ -2,6 +2,8 @@ version: "3.8"
 services:
   nginx:
     image: nginx:latest
+    deploy:
+      replicas: 3
     ports:
     - target: 80
       published: 80

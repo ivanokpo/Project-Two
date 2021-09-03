@@ -3,6 +3,8 @@ services:
   backend:
     image: sjknapp/project-backend-image:latest
     build: ./backend
+    deploy:
+      replicas: 3
     ports: 
     - target: 5001
       published: 5001
@@ -14,6 +16,8 @@ services:
   frontend:
     image: sjknapp/project-frontend-image:latest
     build: ./frontend
+    deploy:    
+      replicas: 3
     ports:
     - target: 5000
       published: 5000
