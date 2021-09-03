@@ -38,8 +38,8 @@ pipeline {
 		sh 'docker stack deploy --compose-file docker-compose.yaml project-stack'
 	    }
 
-            sh 'scp -i ${MANAGER_HOST_KEY} docker-compose.yaml jenkins@11.0.2.11:~'
-            sh 'ssh -i ${MANAGER_HOST_KEY} jenkins@11.0.2.11 "source .profile && docker stack deploy --compose-file docker-compose.yaml project-stack"'
+            sh 'scp -i "${MANAGER_HOST_KEY}" docker-compose.yaml jenkins@11.0.2.11:~'
+            sh 'ssh -i "${MANAGER_HOST_KEY}" jenkins@11.0.2.11 "source .profile && docker stack deploy --compose-file docker-compose.yaml project-stack"'
                             
             }
         }   
