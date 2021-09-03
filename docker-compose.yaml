@@ -5,6 +5,8 @@ services:
     build: ./backend
     deploy:
       replicas: 5
+      update_config:
+        order: start-first
     ports: 
     - target: 5001
       published: 5001
@@ -18,6 +20,8 @@ services:
     build: ./frontend
     deploy:    
       replicas: 5
+      update_config:
+        order: start-first
     ports:
     - target: 5000
       published: 5000
